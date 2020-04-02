@@ -9,11 +9,12 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'TCH58'
+BOT_NAME = 'Job58'
 
-SPIDER_MODULES = ['TCH58.spiders']
-NEWSPIDER_MODULE = 'TCH58.spiders'
+SPIDER_MODULES = ['Job58.spiders']
+NEWSPIDER_MODULE = 'Job58.spiders'
 
+COOKIES_ENABLED=False
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'TCH58 (+http://www.yourdomain.com)'
@@ -53,7 +54,7 @@ ROBOTSTXT_OBEY = False
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'TCH58.middlewares.Tch58DownloaderMiddleware': 543,
+   'Job58.middlewares.RedirectMiddleware': 200,
 }
 
 # Enable or disable extensions
@@ -64,9 +65,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'TCH58.pipelines.Tch58Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'Job58.pipelines.MongoDBPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +89,9 @@ DOWNLOADER_MIDDLEWARES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#LOG_LEVEL="WARNING"
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_START_DELAY = 1.0
+AUTOTHROTTLE_MAX_DELAY = 60.0
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+AUTOTHROTTLE_DEBUG = True

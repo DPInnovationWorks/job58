@@ -8,9 +8,8 @@
 import scrapy
 
 
-class Tch58Item(scrapy.Item):
+class JobItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     job = scrapy.Field()
     company = scrapy.Field()
     salery = scrapy.Field()
