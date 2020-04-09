@@ -8,6 +8,7 @@
 from scrapy import signals
 from scrapy.http import HtmlResponse
 import logging
+from fake_useragent import UserAgent
 
 class RedirectMiddleware(object):
     def process_response(self, request, response, spider):
@@ -19,3 +20,13 @@ class RedirectMiddleware(object):
             return request
         else:
             return response
+class RandomUserAgentMiddleware(object):
+    def __init__(self,crawler):
+        self.ua = UserAgent()
+
+    @classmethod
+    def from_crawler(cls,crawler):
+        return cls(crawler)
+
+    def process_request(self,request,spider):
+        request.headers.setdefault("User-Agent",self.ua.random)

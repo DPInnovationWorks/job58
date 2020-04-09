@@ -35,38 +35,35 @@ class Job58Spider(scrapy.Spider):
         message_2 = soup.select('.pos_welfare')
         message_job1 = soup.select('.des')
         message_job2 = soup.select('.pos_name')
-        contact = soup.select('.pos_area_span')
         message_company = soup.select('.shiji')
-        place = soup.select('.pos_area_item')
+        place = soup.select('.pos-area')
         message_company2_1 = soup.select('.pass_identify')
         message_company2_2 = soup.select('.comp_baseInfo_scale')
         message_company2_3 = soup.select('.comp_baseInfo_belong')
         if place:
-            item['place'] = place.get_text("|", strip=True)
+            item['place'] = place[0].get_text("|", strip=True).replace('|查看地图', '')
         if job:
-            item['job'] = job.get_text("|", strip=True)
+            item['job'] = job[0].get_text("|", strip=True)
         if company:
-            item['company'] = company.get_text("|", strip=True)
+            item['company'] = company[0].get_text("|", strip=True)
         if salery:
-            item['salery'] = salery.get_text("|", strip=True).replace('|', ' ')  # 上面获取的salery表单第一个为广告 第二个为需要的数据
+            item['salery'] = salery[0].get_text("|", strip=True).replace('|', ' ')  # 上面获取的salery表单第一个为广告 第二个为需要的数据
         if message_1:
-            item['message_1'] = message_1.get_text("|", strip=True).replace('|||', ' | ')
+            item['message_1'] = message_1[0].get_text("|", strip=True).replace('|||', ' | ')
         if message_2:
-            item['message_2'] = message_2.get_text("|", strip=True).replace('|', ' ')
+            item['message_2'] = message_2[0].get_text("|", strip=True).replace('|', ' ')
         if message_job1:
-            item['message_job1'] = message_job1.get_text("|", strip=True).replace('|', '')
+            item['message_job1'] = message_job1[0].get_text("|", strip=True).replace('|', '')
         if message_job2:
-            item['message_job2'] = message_job2.get_text("|", strip=True).replace('|', '')
-        if contact:
-            item['contact'] = contact.get_text("|", strip=True).replace('|', '')
+            item['message_job2'] = message_job2[0].get_text("|", strip=True).replace('|', '')
         if message_company:
-            item['message_company'] = message_company.get_text("|", strip=True).replace('|', '')
+            item['message_company'] = message_company[0].get_text("|", strip=True).replace('|', '')
         if message_company2_1:
-            item['message_company2_1'] = message_company2_1.get_text("|", strip=True).replace('|', '')
+            item['message_company2_1'] = message_company2_1[0].get_text("|", strip=True).replace('|', '')
         if message_company2_2:
-            item['message_company2_2'] = message_company2_2.get_text("|", strip=True).replace('|', '')
+            item['message_company2_2'] = message_company2_2[0].get_text("|", strip=True).replace('|', '')
         if message_company2_3:
-            item['message_company2_3'] = message_company2_3.get_text("|", strip=True).replace('|', '')
+            item['message_company2_3'] = message_company2_3[0].get_text("|", strip=True).replace('|', '')
 
         yield item
 
